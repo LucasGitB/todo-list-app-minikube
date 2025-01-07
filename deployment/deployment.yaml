@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-list-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-list-app
+  template:
+    metadata:
+      labels:
+        app: todo-list-app
+    spec:
+      containers:
+      - name: todo-list-app
+        image: todo-list-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"

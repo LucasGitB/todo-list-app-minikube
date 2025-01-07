@@ -63,7 +63,7 @@ kind: Deployment
 metadata:
   name: todo-list-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: todo-list-app
@@ -75,8 +75,16 @@ spec:
       containers:
       - name: todo-list-app
         image: todo-list-app:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
 ```
 
 #### `service.yaml` : Service Kubernetes pour l'application
